@@ -1,0 +1,46 @@
+
+<div class="container">
+  <div class="row">
+    <div style="left: 15px;" class="form-group col-md-12">
+      <h1 >Promise Login Form</h1>
+    </div>
+  </div>
+  <div class="row">
+    <form   [formGroup]="form" class="col-md-12" (submit)="login()">
+      <div class="form-group col-md-12">
+        <label for="email">Email</label>
+        <input type="email" formControlName="email" id="email"
+               class="form-control"
+               [ngClass]="{ 'is-invalid':form.controls['email'].errors && form.controls['email'].touched }"/>
+        <div *ngIf="form.controls['email'].errors" class="invalid-feedback">
+          <div *ngIf="form.controls['email'].errors.required">Email is required</div>
+          <div *ngIf="form.controls['email'].errors.email">Invalid Email!</div>
+        </div>
+      </div>
+
+      <div class="form-group col-md-12">
+        <label for="password">Password</label>
+        <input type="password" formControlName="password" id="password"
+               class="form-control"
+               [ngClass]="{ 'is-invalid':form.controls['password'].errors &&
+                        form.controls['password'].touched}"/>
+        <div *ngIf="form.controls['password'].errors" class="invalid-feedback">
+          <div *ngIf="form.controls['password'].errors.required">Password is required</div>
+        </div>
+      </div>
+      <!-- Specific Observables For Each thing -->
+      <div class="form-group col-md-12">
+        <button  [disabled]="!canSubmitForm()" class="btn-right btn-primary pull-right">Login</button>
+      </div>
+
+      <div id="error-message" *ngIf="hasSubmittingError"  class="alert alert-danger" >
+        <strong>Error!</strong> {{ errorMessage }}
+      </div>
+      <h1>Submitting Form : {{ submitting }}</h1>
+      <h1>Form Valid : {{ form.valid }}</h1>
+
+    </form>
+  </div>
+</div>
+
+
